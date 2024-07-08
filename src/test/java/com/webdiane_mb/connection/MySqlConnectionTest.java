@@ -24,4 +24,6 @@ public class MySqlConnectionTest
 		
 		if(con!=null) { System.out.println("연결 성공!");}
 	}
+	
+	
 }
