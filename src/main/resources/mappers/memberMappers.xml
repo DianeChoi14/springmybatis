@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webdiane_mb.mapper.MemberMapper">
+
+	<!-- DB서버의 현재날짜와 현재 시간을 출력하는 쿼리문  -->
+	<select id="getTime" resultType="string">
+		select now()
+	</select>
+	
+	
+	<!-- Member테이블에 신규회원정보를 저장하는 쿼리문 -->
+	<!-- select타입만 리절트타입을 받는다 -->
+	<!-- mybatis에서는 매개변수가 #{} -->
+	<insert id="saveMember">
+		INSERT INTO member(userId, userPwd, userName, mobile, email) VALUES(#{userId}, sha1(md5(#{userPwd})), #{userName}, #{mobile}, #{email})
+	</insert>
+	
+	<!-- 아이디로 정보를 조회하는 쿼리문 -->
+	<!-- 클래스명을 적을 때는 패키지 필수로 붙이고 .로 이어주기 -->
+	<select id="getMemberByUserId" resultType="com.webdiane_mb.domain.MemberVO">
+		SELECT * FROM member WHERE userId=#{userId}
+	</select>
+	
+	<!-- 모든 정보를 조회하는 쿼리문 -->
+	<!-- 리스트를 조회하더라도 VO타입으로 불러온다 -->
+	<select id="getAllMembers" resultType="com.webdiane_mb.domain.MemberVO">
+		SELECT * FROM member
+	</select>
+</mapper>
