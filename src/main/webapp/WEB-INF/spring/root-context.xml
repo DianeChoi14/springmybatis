@@ -17,11 +17,11 @@
        http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
       http://www.springframework.org/schema/tx 
       http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
+
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
-		
-	<!-- mysql 데이터베이스 연결 -->	
+
+
+	<!-- mysql 데이터베이스 연결 -->
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
@@ -33,17 +33,31 @@
 		<property name="username" value="root"></property>
 		<property name="password" value="1234"></property>
 	</bean>
-	
+
 	<!-- myBatis 연결 -->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		
-		<!-- mybatis 환경설정 경로-->
+
+		<!-- mybatis 환경설정 경로 -->
 		<property name="configLocation"
 			value="classpath:/mybatis-config.xml">
 		</property>
+
+		<property name="mapperLocations"
+			value="classpath:mappers/**/*Mappers.xml">
+		</property>
 	</bean>
 
-
+	<!-- SqlSessionTemplate객체 : (jdbc에서의 Connection, PreparedStatemetnt, 쿼리문 
+		실행, 결과 가져오기, close등의 작업을 수행해주는 객체 -->
+	<!-- 생성자를 통해서 sqlSessionFactory 주입 -->
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
+		<constructor-arg ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	
+	<!-- 아래의 패키지를 조사(scan)하여 필요한 객체를 만들고, 스프링 컨테이너에 의해 관리되도록 한다 -->
+	<context:component-scan base-package="com.webdiane_mb.persistence"></context:component-scan>
 </beans>
