@@ -19,3 +19,12 @@ ADD COLUMN `userPoint` INT NULL DEFAULT 100 AFTER `userImg`;
 
 -- DB서버의 현재 날자와 현재 시간을 출력하는 쿼리문
 SELECT now();
+
+-- MY SQL의 암호화 기법
+SELECT md5('1234');
+SELECT sha1('1234');
+SELECT md5(sha1('1234'));
+
+-- Member테이블에 회원을 insert하는 쿼리문
+INSERT INTO member(userId, userPwd, userName, mobile, email)
+VALUES(?, sha1(md5(?)), ?, ?, ?);
