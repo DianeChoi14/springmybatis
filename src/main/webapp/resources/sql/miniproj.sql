@@ -1,3 +1,4 @@
+use webdiane
 
 -- 회원 테이블 생성
 CREATE TABLE `webdiane`.`member` (
@@ -28,3 +29,12 @@ SELECT md5(sha1('1234'));
 -- Member테이블에 회원을 insert하는 쿼리문
 INSERT INTO member(userId, userPwd, userName, mobile, email)
 VALUES(?, sha1(md5(?)), ?, ?, ?);
+
+-- userId로 해당 유저의 정보를 검색하는 쿼리문 
+SELECT * FROM member WHERE userId=?;
+
+-- member테이블에 모든 정보를 검색하는 쿼리문
+SELECT * FROM member;
+
+-- dooly회원의 이메일을 수정하는 쿼리문
+UPDATE member SET email='dooly@dooly.com' WHERE userId='dooly';
