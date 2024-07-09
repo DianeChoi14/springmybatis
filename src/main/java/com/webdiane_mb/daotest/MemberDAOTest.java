@@ -53,7 +53,7 @@ public class MemberDAOTest
 		System.out.println(mdao.selectMemberByUserID("dooly").toString());
 	}
 	*/
-	
+	/*
 	@Test
 	public void selectAllMemebersTest()
 	{
@@ -62,5 +62,22 @@ public class MemberDAOTest
 		{
 			System.out.println(m.toString());
 		}
+	}
+	*/
+	/*
+	@Test
+	public void updateTest()
+	{
+		String userId = "douner";
+		String mobile = "010-9999-9999";
+		if(mdao.updateMemberMobile(userId, mobile)==1) System.out.println("수정성공");
+		
+	}
+	*/
+	@Test
+	public void deleteTest()
+	{
+		String usreId="douner";
+		if (mdao.removeMember(usreId)==1) System.out.println("삭제 완료");
 	}
 }
