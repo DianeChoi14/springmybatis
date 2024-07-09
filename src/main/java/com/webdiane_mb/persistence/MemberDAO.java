@@ -20,4 +20,12 @@ public interface MemberDAO
 	
 	// 모든 회원정보를 가져오는 메서드
 	public List<MemberVO> selectAllMembers();
+	
+	// 회원의 전화번호를 변경하는 메서드
+	public int updateMemberMobile(String userId, String Mobile);
+	
+	// 회원의 정보를 삭제하는 메서드
+	public int removeMember(String userId);
+	
+
 }
