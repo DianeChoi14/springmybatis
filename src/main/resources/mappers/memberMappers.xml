@@ -28,4 +28,14 @@
 	<select id="getAllMembers" resultType="com.webdiane_mb.domain.MemberVO">
 		SELECT * FROM member
 	</select>
+	
+	<!-- 전화번호를 변경하는 쿼리문 -->
+	<update id="modifyMobile">
+		update member set mobile=#{mobile} where userId=#{userId}
+	</update>
+	
+	<!-- 회원정보를 삭제하는 쿼리문 -->
+	<delete id="removeMember">
+		delete from member where userId=#{userId}
+	</delete>
 </mapper>
