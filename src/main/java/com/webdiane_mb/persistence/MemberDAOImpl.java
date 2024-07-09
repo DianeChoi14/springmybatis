@@ -1,6 +1,8 @@
 package com.webdiane_mb.persistence;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,32 @@ public class MemberDAOImpl implements MemberDAO
 	{
 		return sqlSession.selectList(NS + ".getAllMembers");
 	}
+
+	/*
+	@Override
+	public int updateMemberMobile(String userId, String Mobile) //
+	{
+	업데이트 sql문에서 파라미터가 2개일 때 > Map 사용
+	*/
 	
+	@Override
+	public int updateMemberMobile(String userId, String Mobile) 
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("mobile", Mobile);
+		params.put("userId", userId);
+		return sqlSession.update(NS + ".modifyMobile", params);
+	}
 	
+	// SqlSession Template.update()는 파라미터를 1개만 받을 수 있다. 이 쿼리문은 파라미터가 2개이므로 Map으로 파라미터를 감싸서 넘긴다
+	// 오토와이어드, 인젝트로 주입하는 의존성 객체는 스프링이 관리하는 객체여야 함(root-context.xml의 beans에 있는 객체)
+	// root-context.xml에 beans에 선언하면 스프링 컨테이너 메모리에서 계속 사용되므로 X, 클래스 내에서 선언하여 사용 
+
+	@Override
+	public int removeMember(String userId) 
+	{
+		return sqlSession.delete(NS + ".removeMember", userId);
+	}
+
+
 }
